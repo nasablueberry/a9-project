@@ -1,0 +1,161 @@
+diff --git a/src/components/Navbar.jsx b/src/components/Navbar.jsx
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/src/components/Navbar.jsx
+@@ -0,0 +1,78 @@
++import React from 'react';
++import { Link } from 'react-router-dom';
++
++export default function Navbar() {
++  return (
++    <nav className="bg-white shadow-md">
++      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
++        <div className="flex items-center gap-4">
++          <Link to="/" className="text-2xl font-bold text-blue-600">
++            WarmPaws
++          </Link>
++        </div>
++
++        <div className="hidden md:flex items-center gap-6">
++          <a href="#services" className="text-gray-700 hover:text-blue-600">
++            Services
++          </a>
++          <a href="#tips" className="text-gray-700 hover:text-blue-600">
++            Tips
++          </a>
++          <a href="#experts" className="text-gray-700 hover:text-blue-600">
++            Experts
++          </a>
++          <Link to="/profile" className="text-gray-700 hover:text-blue-600 font-medium">
++            My Profile
++          </Link>
++        </div>
++
++        <div className="md:hidden">
++          <details className="relative">
++            <summary className="cursor-pointer text-gray-700">Menu</summary>
++            <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded">
++              <ul className="p-2">
++                <li className="py-1"><a href="#services" className="block px-2">Services</a></li>
++                <li className="py-1"><a href="#tips" className="block px-2">Tips</a></li>
++                <li className="py-1"><a href="#experts" className="block px-2">Experts</a></li>
++                <li className="py-1"><Link to="/profile" className="block px-2">My Profile</Link></li>
++              </ul>
++            </div>
++          </details>
++        </div>
++      </div>
++    </nav>
++  );
++}
++
+diff --git a/src/pages/Profile.jsx b/src/pages/Profile.jsx
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/src/pages/Profile.jsx
+@@ -0,0 +1,82 @@
++import React from 'react';
++
++export default function Profile() {
++  return (
++    <div className="container mx-auto px-4 py-12">
++      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8">
++        <div className="flex items-center gap-6">
++          <img
++            src="https://avatars.githubusercontent.com/u/0?v=4"
++            alt="Profile"
++            className="w-24 h-24 rounded-full object-cover"
++          />
++          <div>
++            <h1 className="text-2xl font-bold">Raian Kibria Rohan</h1>
++            <p className="text-gray-600">Frontend Engineer • React • Tailwind CSS</p>
++            <p className="text-gray-500 mt-2">Dhaka, Bangladesh • raian@example.com</p>
++          </div>
++        </div>
++
++        <hr className="my-6" />
++
++        <section>
++          <h2 className="text-xl font-semibold mb-2">Work</h2>
++          <ul className="list-disc list-inside space-y-2 text-gray-700">
++            <li>
++              <strong>Frontend Developer</strong> — Company A (2023–Present)
++              <div className="text-sm text-gray-500">Building responsive React apps, performance optimization, accessibility</div>
++            </li>
++            <li>
++              <strong>Web Developer</strong> — Company B (2021–2023)
++              <div className="text-sm text-gray-500">Created web features, component libraries, and CI/CD pipelines</div>
++            </li>
++            <li>
++              <strong>Open Source</strong> — Contributor
++              <div className="text-sm text-gray-500">Contributions to UI tooling and documentation</div>
++            </li>
++          </ul>
++        </section>
++
++        <hr className="my-6" />
++
++        <section>
++          <h2 className="text-xl font-semibold mb-2">Skills</h2>
++          <div className="flex flex-wrap gap-2">
++            <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded">React</span>
++            <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded">JavaScript</span>
++            <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded">Tailwind CSS</span>
++            <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded">Vite</span>
++          </div>
++        </section>
++      </div>
++    </div>
++  );
++}
++
+diff --git a/src/App.jsx b/src/App.jsx
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/src/App.jsx
+@@ -0,0 +1,44 @@
++import React from 'react';
++import { BrowserRouter, Routes, Route } from 'react-router-dom';
++import Navbar from './components/Navbar';
++import Home from './pages/Home';
++import Profile from './pages/Profile';
++
++export default function App() {
++  return (
++    <BrowserRouter>
++      <Navbar />
++      <main>
++        <Routes>
++          <Route path="/" element={<Home />} />
++          <Route path="/profile" element={<Profile />} />
++        </Routes>
++      </main>
++    </BrowserRouter>
++  );
++}
++
+diff --git a/src/main.jsx b/src/main.jsx
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/src/main.jsx
+@@ -0,0 +1,16 @@
++import React from 'react';
++import { createRoot } from 'react-dom/client';
++import App from './App';
++import './index.css';
++
++const container = document.getElementById('root');
++if (!container) {
++  throw new Error('Root element (#root) not found — ensure your index.html has <div id="root"></div>');
++}
++
++createRoot(container).render(
++  <React.StrictMode>
++    <App />
++  </React.StrictMode>
++);
++
