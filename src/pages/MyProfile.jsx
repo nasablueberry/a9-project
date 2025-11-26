@@ -1,0 +1,86 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { Mail, User, Calendar, Edit } from 'lucide-react';
+export default function MyProfile() {
+    const { user } = useAuth();
+    const navigate = useNavigate();
+    if (!user) {
+        return null;
+    }
+    const joinDate = user.metadata.creationTime
+        ? new Date(user.metadata.creationTime).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        })
+        : 'Unknown';
+    return (React.createElement("div", { className: "min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 py-12" },
+        React.createElement("div", { className: "container mx-auto px-4" },
+            React.createElement("div", { className: "max-w-4xl mx-auto" },
+                React.createElement("div", { className: "bg-white rounded-2xl shadow-xl overflow-hidden", "data-aos": "fade-up" },
+                    React.createElement("div", { className: "h-32 bg-gradient-to-r from-blue-500 to-blue-600" }),
+                    React.createElement("div", { className: "relative px-8 pb-8" },
+                        React.createElement("div", { className: "flex flex-col md:flex-row items-center md:items-end gap-6 -mt-16" },
+                            React.createElement("img", { src: user.photoURL || 'https://via.placeholder.com/150', alt: user.displayName || 'User', className: "w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover" }),
+                            React.createElement("div", { className: "text-center md:text-left flex-1" },
+                                React.createElement("h1", { className: "text-gray-900 mb-1" }, user.displayName || 'Anonymous User'),
+                                React.createElement("p", { className: "text-gray-600" }, user.email)),
+                            React.createElement("button", { onClick: () => navigate('/update-profile'), className: "flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors" },
+                                React.createElement(Edit, { size: 18 }),
+                                "Update Profile")),
+                        React.createElement("div", { className: "mt-8 grid grid-cols-1 md:grid-cols-2 gap-6" },
+                            React.createElement("div", { className: "bg-gray-50 p-6 rounded-xl" },
+                                React.createElement("h3", { className: "text-gray-900 mb-4" }, "Account Information"),
+                                React.createElement("div", { className: "space-y-4" },
+                                    React.createElement("div", { className: "flex items-center gap-3" },
+                                        React.createElement("div", { className: "w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center" },
+                                            React.createElement(User, { size: 20, className: "text-blue-600" })),
+                                        React.createElement("div", null,
+                                            React.createElement("p", { className: "text-sm text-gray-500" }, "Full Name"),
+                                            React.createElement("p", { className: "text-gray-900" }, user.displayName || 'Not set'))),
+                                    React.createElement("div", { className: "flex items-center gap-3" },
+                                        React.createElement("div", { className: "w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center" },
+                                            React.createElement(Mail, { size: 20, className: "text-blue-600" })),
+                                        React.createElement("div", null,
+                                            React.createElement("p", { className: "text-sm text-gray-500" }, "Email Address"),
+                                            React.createElement("p", { className: "text-gray-900" }, user.email))),
+                                    React.createElement("div", { className: "flex items-center gap-3" },
+                                        React.createElement("div", { className: "w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center" },
+                                            React.createElement(Calendar, { size: 20, className: "text-blue-600" })),
+                                        React.createElement("div", null,
+                                            React.createElement("p", { className: "text-sm text-gray-500" }, "Member Since"),
+                                            React.createElement("p", { className: "text-gray-900" }, joinDate))))),
+                            React.createElement("div", { className: "bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-xl text-white" },
+                                React.createElement("h3", { className: "mb-4" }, "Your WarmPaws Stats"),
+                                React.createElement("div", { className: "space-y-4" },
+                                    React.createElement("div", { className: "flex justify-between items-center" },
+                                        React.createElement("span", null, "Services Booked"),
+                                        React.createElement("span", { className: "text-3xl" }, "0")),
+                                    React.createElement("div", { className: "flex justify-between items-center" },
+                                        React.createElement("span", null, "Upcoming Appointments"),
+                                        React.createElement("span", { className: "text-3xl" }, "0")),
+                                    React.createElement("div", { className: "flex justify-between items-center" },
+                                        React.createElement("span", null, "Favorite Services"),
+                                        React.createElement("span", { className: "text-3xl" }, "0"))))),
+                        React.createElement("div", { className: "mt-6 bg-gray-50 p-6 rounded-xl" },
+                            React.createElement("h3", { className: "text-gray-900 mb-4" }, "Recent Activity"),
+                            React.createElement("div", { className: "text-center py-8" },
+                                React.createElement("div", { className: "text-6xl mb-4" }, "\uD83D\uDCCB"),
+                                React.createElement("p", { className: "text-gray-600" }, "No recent activity"),
+                                React.createElement("p", { className: "text-gray-500 text-sm mt-2" }, "Book a service to see your activity here"),
+                                React.createElement("button", { onClick: () => navigate('/'), className: "mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors" }, "Browse Services"))))),
+                React.createElement("div", { className: "mt-8 grid grid-cols-1 md:grid-cols-3 gap-6" },
+                    React.createElement("div", { className: "bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow cursor-pointer", onClick: () => navigate('/'), "data-aos": "fade-up", "data-aos-delay": "100" },
+                        React.createElement("div", { className: "text-4xl mb-3" }, "\uD83D\uDC3E"),
+                        React.createElement("h3", { className: "text-gray-900 mb-2" }, "Browse Services"),
+                        React.createElement("p", { className: "text-gray-600 text-sm" }, "Explore winter care services for your pets")),
+                    React.createElement("div", { className: "bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow cursor-pointer", "data-aos": "fade-up", "data-aos-delay": "200" },
+                        React.createElement("div", { className: "text-4xl mb-3" }, "\uD83D\uDCAC"),
+                        React.createElement("h3", { className: "text-gray-900 mb-2" }, "Contact Support"),
+                        React.createElement("p", { className: "text-gray-600 text-sm" }, "Get help from our friendly support team")),
+                    React.createElement("div", { className: "bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow cursor-pointer", onClick: () => navigate('/update-profile'), "data-aos": "fade-up", "data-aos-delay": "300" },
+                        React.createElement("div", { className: "text-4xl mb-3" }, "\u2699\uFE0F"),
+                        React.createElement("h3", { className: "text-gray-900 mb-2" }, "Account Settings"),
+                        React.createElement("p", { className: "text-gray-600 text-sm" }, "Manage your profile and preferences")))))));
+}
