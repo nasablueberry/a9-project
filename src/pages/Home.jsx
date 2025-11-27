@@ -167,5 +167,5 @@ export default function Home() {
                             React.createElement("img", { src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop", alt: "Customer", className: "w-12 h-12 rounded-full object-cover" }),
                             React.createElement("div", null,
                                 React.createElement("p", null, "Sarah Williams"),
-                                React.createElement("p", { className: "text-gray-500 text-sm" }, "Pet Owner")))))))));
+                                React.createElement("p", { className: "text-gray-500 text-sm" }, "Pet Owner")))))))))"
 }
